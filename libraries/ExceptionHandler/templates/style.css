@@ -1,0 +1,65 @@
+body {
+    margin: 20px 0;
+    background-color: #CED0C5;
+    font: 13px/1.231 arial,helvetica,clean,sans-serif;
+    font-family: "Myriad Pro","Segoe UI",Helvetica, Arial, sans-serif;
+}
+
+h1, p { margin: 10px; }
+.center { text-align: center; }
+a { color: #2c4460; text-decoration: none; }
+a:focus, a:hover, .current, .underline { text-decoration: underline; }
+a:focus{ background-color:#FFFFCC; }
+a:visited { color:#005a9c; }
+
+#container {
+    margin: auto;
+    width: 950px;
+}
+
+    #message {
+        margin: 10px;
+        margin-bottom: 20px;
+        background: #E9DDDD none;
+        padding: 5px;
+    }
+
+    #message h1 {
+        color: #AE5050;
+        font-size: 167%;
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    #message p {
+        color: #333;
+        font-size: 1.1em;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    #traceContainer {
+        margin: 10px;
+        background: #ECEBDD none;
+    }
+
+        .stackTrace { padding-bottom: 10px; }
+
+            .stackTrace h1 {
+                padding-top: 10px;
+                color: #787849;
+                font-size: 146.5%;
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            .stackTrace .trace {
+                margin: 10px;
+                background-color: #FAFAF6;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                border-radius: 10px;
+            }
+
+/* GeSHi's rectification */
+ol { overflow: auto; padding-left: 50px; }

@@ -1,0 +1,15 @@
+        <div class="stackTrace" id="stack_<?php echo $compteur; ?>">
+            <?php if ($message): ?>
+            <h1>Stack Trace</h1>
+            <?php endif; ?>
+
+            <p id="fileInfo_<?php echo $compteur; ?>" class="fileInfo">
+                <?php echo $compteur; ?>.
+                In <?php echo $file; ?>, line <?php echo $line; ?>
+            </p>
+
+            <div class="trace<?php echo (($message) ? ' first' : ''); ?>"
+                id="trace_<?php echo $compteur; ?>">
+                <?php echo $code; ?>
+            </div>
+        </div>
