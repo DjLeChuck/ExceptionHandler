@@ -12,8 +12,8 @@ Just download and extract the package. Configures.
 All you have to do is to:
     * set the relative path of your library,
     * include the GeSHi's file (it lives in geshi's subdirectory),
-    * instanciate GeSHi,
-    * instanciate the handler with the relative path of the file and an instance of GeSHi.
+    * instantiate GeSHi,
+    * instantiate the handler with the relative path of the file and an instance of GeSHi.
 Then configure the PHP exception handler.
 
 ```php
