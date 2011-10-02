@@ -10,28 +10,28 @@
  */
 class ExceptionHandler
 {
-    /** Number of lines to show */
-    const ADDITIONAL_LINES = 5;
-
     /** Style for the highlighted line */
     const HIGHLIGHT_STYLE = 'background-color: #FCFFBF;';
 
-    /** Use javascript's effects (with Mootools) or not */
-    const USE_JAVASCRIPT = true;
-
     protected   $thisFilePath,
-                $geshi;
+                $geshi,
+                $additionnalLines,
+                $useJavascript;
 
     /**
      * Constructor
      *
-     * @param string    $thisFilePath   Relative path of this file
-     * @param Object    $geshi          The instance of GeSHi
+     * @param string    $thisFilePath       Relative path of this file
+     * @param Object    $geshi              The instance of GeSHi
+     * @param int       $additionnalLines   Number of lines to show
+     * @param Boolean   $useJavascript      Use or not javascript
      */
-    public function __construct($thisFilePath, GeSHi $geshi = null)
+    public function __construct($thisFilePath, GeSHi $geshi = null, $additionnalLines = 5, $useJavascript = true)
     {
-        $this->thisFilePath = $thisFilePath;
-        $this->geshi        = $geshi;
+        $this->thisFilePath     = $thisFilePath;
+        $this->geshi            = $geshi;
+        $this->additionnalLines = $additionnalLines;
+        $this->useJavascript    = $useJavascript;
     }
 
     /**
@@ -43,7 +43,7 @@ class ExceptionHandler
         ob_start();
 
         $thisFilePath   = $this->thisFilePath;
-        $useJavascript  = self::USE_JAVASCRIPT;
+        $useJavascript  = $this->useJavascript;
 
         $message    = $e->getMessage();
         $file       = $e->getFile();
@@ -83,17 +83,21 @@ class ExceptionHandler
      */
     protected function _traceException($line, $file)
     {
-        $fileContents   = file($file);
-        $linesToShow    = array();
-        $source         = '';
+        try {
+            $fileContents   = @file($file);
+            $linesToShow    = array();
+            $source         = '';
 
-        // Get 5 lines before and after the defected line
-        for ($x = ($line - self::ADDITIONAL_LINES - 1); $x < ($line + self::ADDITIONAL_LINES); $x++) {
-            if (!empty($fileContents[$x]))
-                $source .= $fileContents[$x];
+            // Get 5 lines before and after the flawed line
+            for ($x = ($line - $this->additionnalLines - 1); $x < ($line + $this->additionnalLines); $x++) {
+                if (!empty($fileContents[$x]))
+                    $source .= $fileContents[$x];
+            }
+
+            return $this->_configureAndLaunchGeshi($line, $source);
+        } catch (Exception $e) {
+            return '';
         }
-
-        return $this->_configureAndLaunchGeshi($line, $source);
     }
 
     /**
@@ -111,11 +115,11 @@ class ExceptionHandler
             $this->geshi->set_source($source);
 
             $this->geshi->set_header_type(GESHI_HEADER_NONE);
-            $this->geshi->highlight_lines_extra(array(self::ADDITIONAL_LINES + 1));
+            $this->geshi->highlight_lines_extra(array($this->additionnalLines + 1));
             $this->geshi->set_highlight_lines_extra_style(self::HIGHLIGHT_STYLE);
             $this->geshi->set_language_path(dirname(__FILE__) . DIRECTORY_SEPARATOR.'geshi'.DIRECTORY_SEPARATOR);
 
-            $this->geshi->start_line_numbers_at($line - self::ADDITIONAL_LINES);
+            $this->geshi->start_line_numbers_at($line - $this->additionnalLines);
             $this->geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
 
             return $this->geshi->parse_code();

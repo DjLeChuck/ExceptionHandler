@@ -8,8 +8,10 @@
                 In <?php echo $file; ?>, line <?php echo $line; ?>
             </p>
 
+            <?php if (!empty($code)): ?>
             <div class="trace<?php echo (($message) ? ' first' : ''); ?>"
                 id="trace_<?php echo $compteur; ?>">
                 <?php echo $code; ?>
             </div>
+            <?php endif; ?>
         </div>

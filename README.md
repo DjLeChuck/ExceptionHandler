@@ -48,6 +48,18 @@ set_exception_handler(array($exceptionHandler, 'catchEmAll'));
 
 ```
 
+There are two optional arguments: the number of lines to display and the use or not of javascript.
+The first is set to 5 by default and the second as true.
+
+You can change it if you want, for example, show 8 lines and do not use javascript:
+
+```php
+<?php
+
+$exceptionHandler = new ExceptionHandler($libraryPath, $geshi, 8, false);
+
+```
+
 ## Mechanism
 
 When an exception is caught, ExceptionHandler does his job and traces the exceptions' stack.
