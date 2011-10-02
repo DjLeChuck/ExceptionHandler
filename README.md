@@ -10,10 +10,12 @@ Just download and extract the package. Configures.
 ## Configuration
 
 All you have to do is to:
-    * set the relative path of your library,
-    * include the GeSHi's file (it lives in geshi's subdirectory),
-    * instantiate GeSHi,
-    * instantiate the handler with the relative path of the file and an instance of GeSHi.
+
+1.    set the relative path of your library,
+2.    include the GeSHi's file (it lives in geshi's subdirectory),
+3.    instantiate GeSHi,
+4.    instantiate the handler with the relative path of the file and an instance of GeSHi.
+
 Then configure the PHP exception handler.
 
 ```php
@@ -21,6 +23,7 @@ Then configure the PHP exception handler.
 
 // Load ExceptionHandler
 $libraryPath = 'path/to/ExceptionHandler/';
+require_once $libraryPath.'ExceptionHandler.php';
 require_once $libraryPath.'geshi/geshi.php';
 
 $geshi            = new GeSHi();
@@ -30,13 +33,14 @@ set_exception_handler(array($exceptionHandler, 'catchEmAll'));
 
 ```
 
-GeSHi is used to colorize the code syntax. If you don't want to use it, configure like the following instructions:
+GeSHi is used to colorize the code. If you don't want to use it, configure like the following instructions:
 
 ```php
 <?php
 
 // Load ExceptionHandler
 $libraryPath = 'path/to/ExceptionHandler/';
+require_once $libraryPath.'ExceptionHandler.php';
 
 $exceptionHandler = new ExceptionHandler($libraryPath);
 
@@ -46,7 +50,7 @@ set_exception_handler(array($exceptionHandler, 'catchEmAll'));
 
 ## Mechanism
 
-When an exception is caught, ExceptionHandler do his job and traces the exceptions' stack.
+When an exception is caught, ExceptionHandler does his job and traces the exceptions' stack.
 
 
 ## License
