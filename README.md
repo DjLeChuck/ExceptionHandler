@@ -29,8 +29,6 @@ require_once $libraryPath.'geshi/geshi.php';
 $geshi            = new GeSHi();
 $exceptionHandler = new ExceptionHandler($libraryPath, $geshi);
 
-set_exception_handler(array($exceptionHandler, 'catchEmAll'));
-
 ```
 
 GeSHi is used to colorize the code. If you don't want to use it, configure like the following instructions:
@@ -43,8 +41,6 @@ $libraryPath = 'path/to/ExceptionHandler/';
 require_once $libraryPath.'ExceptionHandler.php';
 
 $exceptionHandler = new ExceptionHandler($libraryPath);
-
-set_exception_handler(array($exceptionHandler, 'catchEmAll'));
 
 ```
 

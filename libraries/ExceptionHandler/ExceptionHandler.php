@@ -32,6 +32,8 @@ class ExceptionHandler
         $this->geshi            = $geshi;
         $this->additionnalLines = $additionnalLines;
         $this->useJavascript    = $useJavascript;
+
+        set_exception_handler(array($exceptionHandler, 'catchEmAll'));
     }
 
     /**
