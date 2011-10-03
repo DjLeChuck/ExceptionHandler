@@ -33,7 +33,7 @@ class ExceptionHandler
         $this->additionnalLines = $additionnalLines;
         $this->useJavascript    = $useJavascript;
 
-        set_exception_handler(array($exceptionHandler, 'catchEmAll'));
+        set_exception_handler(array($this, 'catchEmAll'));
     }
 
     /**
