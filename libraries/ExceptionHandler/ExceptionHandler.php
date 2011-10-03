@@ -76,6 +76,14 @@ class ExceptionHandler
     }
 
     /**
+     * Restores the previous exception handler
+     */
+    public function restore()
+    {
+        restore_exception_handler();
+    }
+
+    /**
      * Traces the exception
      *
      * @param   int     $line   The line concerned by the exception
